@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            new Watch().Run();
+            new Watch.Watch().Run();
         }
     }
 }
