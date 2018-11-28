@@ -43,6 +43,7 @@ namespace Design.LRU
             else
             {
                 last = node.Pre;
+                last.Next = null;
             }
 
             node.Next = first;
@@ -76,10 +77,15 @@ namespace Design.LRU
             }
         }
 
-        static void Test()
+        public static void Test()
         {
             LeastRecentUsedCache test = new LeastRecentUsedCache(2);
             Console.WriteLine(test.Get(3));
+            test.Set(2, 2);
+            Console.WriteLine(test.Get(2));
+            test.Set(1, 1);
+            test.Set(3, 3);
+            Console.WriteLine(test.Get(2));
         }
     }
 

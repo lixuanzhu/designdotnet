@@ -19,11 +19,13 @@ namespace Design.Watch
                         new MyTimer(),
                         new MyClock()};
             mode = 0;
-            using (File.Create(fileName)) ;
         }
 
-        public void Run()
+        public static void Test()
         {
+            using (File.Create(fileName));
+            Watch test = new Watch();
+            string button;
             while (true)
             {
                 using (StreamReader sr = new StreamReader(fileName))
@@ -40,11 +42,11 @@ namespace Design.Watch
 
                     if (button == "A")
                     {
-                        mode = (mode + 1) % totalMode;
+                        test.mode = (test.mode + 1) % totalMode;
                     }
                     else if (button.Equals("B"))
                     {
-                        watch[mode].PressButtonB();
+                        test.watch[test.mode].PressButtonB();
                     }
                     else
                     {
@@ -53,7 +55,7 @@ namespace Design.Watch
                     }
                 }
                 Console.Write("\r                           \r");
-                Console.Write(watch[mode].Display());
+                Console.Write(test.watch[test.mode].Display());
                 Thread.Sleep(100);
             }
         }
