@@ -46,19 +46,13 @@ namespace Design.MailBox
             return null;
         }
 
-        public void Run()
+        public static void Test()
         {
-            Box box = Deposit(BoxSize.large);
+            BoxWall test = new BoxWall();
+            Box box = test.Deposit(BoxSize.large);
             string secrete = box.Secrete;
-            Box box2 = Pickup(secrete);
-            if(box2 == box)
-            {
-                Console.WriteLine("same box with id: " + box.Id);
-            }
-            else
-            {
-                Console.WriteLine("wrong box");
-            }
+            Box box2 = test.Pickup(secrete);
+            TestUtil.Verify(box.Id, box2.Id);
         }
     }
 }

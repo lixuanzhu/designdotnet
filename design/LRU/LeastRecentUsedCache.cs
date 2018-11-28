@@ -61,13 +61,16 @@ namespace Design.LRU
             }
 
             LinkedNode newNode = new LinkedNode(key, value);
-            newNode.Next = first;
-            first = newNode;
-            map.Add(key, newNode);
-            if (map.Count == 1)
+            if (map.Count == 0)
             {
                 last = newNode;
+                first = newNode;
             }
+
+            newNode.Next = first;
+            first.Pre = newNode;
+            first = newNode;
+            map.Add(key, newNode);
 
             if (map.Count > cap)
             {
@@ -80,25 +83,15 @@ namespace Design.LRU
         public static void Test()
         {
             LeastRecentUsedCache test = new LeastRecentUsedCache(2);
-            Console.WriteLine(test.Get(3));
+            TestUtil.Verify(-1, test.Get(3));
             test.Set(2, 2);
-            Console.WriteLine(test.Get(2));
+            TestUtil.Verify(2, test.Get(2));
             test.Set(1, 1);
             test.Set(3, 3);
-            Console.WriteLine(test.Get(2));
-        }
-    }
-
-    class LinkedNode
-    {
-        public int Key { get; set; }
-        public int Value { get; set; }
-        public LinkedNode Next { get; set; }
-        public LinkedNode Pre { get; set; }
-        public LinkedNode(int key, int value)
-        {
-            Key = key;
-            Value = value;
+            TestUtil.Verify(-1, test.Get(2));
+            test.Set(1, 1);
+            test.Set(2, 2);
+            TestUtil.Verify(-1, test.Get(3));
         }
     }
 }
