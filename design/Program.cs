@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            new Watch.Watch().Run();
+            new MailBox.BoxWall().Run();
         }
     }
 }
