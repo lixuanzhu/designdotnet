@@ -66,10 +66,13 @@ namespace Design.LRU
                 last = newNode;
                 first = newNode;
             }
+            else
+            {
+                newNode.Next = first;
+                first.Pre = newNode;
+                first = newNode;
+            }
 
-            newNode.Next = first;
-            first.Pre = newNode;
-            first = newNode;
             map.Add(key, newNode);
 
             if (map.Count > cap)
